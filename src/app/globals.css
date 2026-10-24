@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #C9A96E;
+  --gold-light: #E8D5A8;
+  --gold-dark: #9A7A45;
+  --noir: #0A0A0A;
+  --charcoal: #1A1A1A;
+  --ivory: #F5F0E8;
+  --cream: #E8E0D0;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #0A0A0A;
+  color: #F5F0E8;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide default cursor on desktop */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Luxury scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A96E;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E8D5A8;
+}
+
+/* Selection */
+::selection {
+  background: rgba(201, 169, 110, 0.2);
+  color: #F5F0E8;
+}
+
+/* Luxury text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C9A96E 0%, #F0DCA0 40%, #C9A96E 60%, #9A7A45 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(105deg, #9A7A45 0%, #C9A96E 30%, #F0DCA0 50%, #C9A96E 70%, #9A7A45 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerText 4s linear infinite;
+}
+
+@keyframes shimmerText {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Atmospheric glow */
+.glow-gold {
+  box-shadow: 0 0 40px rgba(201, 169, 110, 0.2), 0 0 80px rgba(201, 169, 110, 0.08);
+}
+.glow-gold-strong {
+  box-shadow: 0 0 60px rgba(201, 169, 110, 0.35), 0 0 120px rgba(201, 169, 110, 0.15);
+}
+
+/* Glass morphism - tasteful */
+.glass-dark {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 169, 110, 0.12);
+}
+.glass-mid {
+  background: rgba(26, 26, 26, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 169, 110, 0.1);
+}
+
+/* Noise texture overlay */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Divider lines */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.4), transparent);
+}
+
+/* Luxury button base */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 500;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-luxury:hover::before {
+  transform: translateX(100%);
+}
+
+/* Section reveal utility */
+.section-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ambient background pulse */
+@keyframes ambientPulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+/* Smoke particles */
+@keyframes smokeFloat {
+  0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
+  10% { opacity: 0.5; }
+  80% { opacity: 0.1; }
+  100% { transform: translateY(-150px) translateX(30px) scale(2); opacity: 0; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Typography utilities */
+.heading-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
+}
+.heading-editorial {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+}
+.label-luxury {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+}
+
+/* Image overlay */
+.image-cinematic {
+  filter: contrast(1.05) saturate(0.8);
+}
+
+/* Paragraph luxury */
+.prose-luxury {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  color: rgba(245, 240, 232, 0.6);
+}
